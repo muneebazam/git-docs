@@ -15,16 +15,14 @@ from botocore.exceptions import ClientError
 slack_chat_url = "https://slack.com/api/chat.postMessage"
 
 # Generates a swagger page and moves the swagger spec, if required
-def move_swagger_file(name, content_dir, swagger_dir):
-    if (os.path.exists("{}swagger-spec/".format(content_dir))):
-        os.chdir("{}swagger-spec/".format(content_dir))
-        sourcefiles = os.listdir('.')
-        for file in sourcefiles:
-            if (file.endswith('.json') or file.endswith('.yaml')):
-                shutil.move("{}/{}".format(os.getcwd(), file), swagger_dir)
-                logging.info("Found local swagger file: {}.".format(file))
-                return "{}{}".format(swagger_dir, file)
-    return 0
+def move_repository_icon(name, content_dir, image_dir):
+    image_file = "{0}{1}/{1}.png".format(content_dir, name)
+    if (os.path.isfile(image_file)):
+        print("attempting move")
+        print(image_dir)
+        shutil.move(image_file, image_dir)
+        return 0
+    return 1
 
 
 # Wrapper function to subprocess.run (pipes all stdout/stderr to log file)
