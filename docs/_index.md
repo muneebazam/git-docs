@@ -1,7 +1,7 @@
-+++
-title = "Git Docs"
-weight = 97
-+++
+---
+title : Git Docs
+weight : 97
+---
 
 ## Coming Soon 
 
