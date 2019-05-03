@@ -1,4 +1,4 @@
-# A collection of common functions used to build the developer portal
+# A collection of common functions used by the git docs framework 
 
 import os
 import logging
@@ -12,8 +12,6 @@ import shutil
 import requests
 from botocore.exceptions import ClientError
 
-slack_chat_url = "https://slack.com/api/chat.postMessage"
-
 # Generates a swagger page and moves the swagger spec, if required
 def move_repository_icon(name, content_dir, image_dir):
     image_file = "{0}{1}/{1}.png".format(content_dir, name)
@@ -23,7 +21,6 @@ def move_repository_icon(name, content_dir, image_dir):
         shutil.move(image_file, image_dir)
         return 0
     return 1
-
 
 # Wrapper function to subprocess.run (pipes all stdout/stderr to log file)
 def run_subcommand(command, print_output=True):
@@ -39,7 +36,6 @@ def run_subcommand(command, print_output=True):
         raise e
 
     return completed_process.returncode
-
 
 # Client to retrieve envars from AWS Secret Manager
 def secret_manager_client(secret_name):
@@ -77,7 +73,6 @@ def git_env_setup(repo_url, repo_name):
 
     return 0
 
-
 # Retrieves repository config file and returns contents as type:dict
 def repository_configuration(config_file):
 
@@ -91,7 +86,6 @@ def repository_configuration(config_file):
 
     return 0
 
-
 # pulls content(s) from specificed url with svn client
 def svn_client(svn_url, user, password):
 
@@ -103,7 +97,6 @@ def svn_client(svn_url, user, password):
 
     return 0
 
-
 # Modify git url to be compatible with svn client
 def svn_urlify(git_url):
 
@@ -113,4 +106,3 @@ def svn_urlify(git_url):
         return re.sub("tree/master", "trunk", git_url, 1)
     else:
         return re.sub("tree", "branches", git_url, 1) 
-

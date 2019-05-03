@@ -101,7 +101,7 @@ if __name__ == "__main__":
     base = "{}/tmp".format(os.getcwd())
     os.makedirs(base)
     class Context:
-        function_name = "local-external-portal-publisher"
+        function_name = "local-site-publisher"
         aws_request_id = "local"
     build_website({}, Context(), base_dir=base, local=True)
 
