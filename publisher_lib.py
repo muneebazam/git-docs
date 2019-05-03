@@ -16,8 +16,6 @@ from botocore.exceptions import ClientError
 def move_repository_icon(name, content_dir, image_dir):
     image_file = "{0}{1}/{1}.png".format(content_dir, name)
     if (os.path.isfile(image_file)):
-        print("attempting move")
-        print(image_dir)
         shutil.move(image_file, image_dir)
         return 0
     return 1
