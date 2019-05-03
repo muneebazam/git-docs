@@ -1,6 +1,5 @@
 """
-Lambda function to rebuild a microsite on the AIR MILES developer portal.
-Created by TARDIS (#rtc-workstream).
+AWS Lambda function to rebuild my personal website at muneebazam.com 
 """
 
 import os
@@ -10,35 +9,28 @@ import boto3
 import subprocess
 import sys
 import shutil
-sys.path.insert(0, '..')
 import portal_common_lib as portal
 
 # Retrieve environment variables 
 secret_name = os.environ["AWS_SECRET_MANAGER"]
 
-# lambda entry point
-def build_microsite(data, context, base_dir="/tmp", local=False):
+def build_website(data, context, base_dir="/tmp", local=False):
 
      # Configure logger and extract data
     root = logging.getLogger()
     root.setLevel(logging.INFO)
-    name = data["repo_name"]
-    url = data["repo_url"]
-    logging.info("Function invoked to build microsite for {}".format(name))
 
     # Retrieve secrets from AWS Secret Manager, will terminate upon failure
     try:
         secrets_json = portal.secret_manager_client(secret_name)
         secrets = json.loads(secrets_json)
-        git_user = secrets["gitUser"]
-        git_password = secrets["gitPassword"]
-        slack_token = secrets["slackToken"]
-        log_channel = secrets["logChannel"]
-        repo_name = secrets["repoName"]
-        s3_bucket = secrets["s3ExternalBucket"]
+        git_user = secrets["git_user"]
+        git_password = secrets["git_password"]
+        repo_name = secrets["repo_name"]
+        s3_bucket = secrets["s3_bucket"]
         logging.info("Retrieved {} secret from AWS Secret Manager.".format(secret_name))
-    except Exception:
-        portal.terminate_program("Terminating due to failed attempt at retrieving secrets.", slack_token, log_channel, context)
+    except Exception as e:
+        logging.error(e)
         sys.exit(1)
 
     # Define global read-only variables 
@@ -49,12 +41,12 @@ def build_microsite(data, context, base_dir="/tmp", local=False):
 
     # Clone and setup central repository, will terminate upon failure 
     try:
-        repo_url = 'https://{}:{}@github.com/LoyaltyOne/{}.git'.format(git_user, git_password, repo_name)
+        repo_url = 'https://{}:{}@github.com/{}/{}.git'.format(git_user, git_password, git_user, repo_name)
         os.chdir(base_dir)
         portal.git_env_setup(repo_url, repo_name)
         logging.info("Cloned {} repository into /tmp.".format(repo_name))
-    except Exception:
-        portal.terminate_program("Terminating due to failure in setting up git environment.", slack_token, log_channel, context)
+    except Exception as e:
+        logging.error(e)
         sys.exit(1)
 
     # Use svn client to pull in contents from user repository 
@@ -83,7 +75,6 @@ def build_microsite(data, context, base_dir="/tmp", local=False):
                 os.remove(spec_file_path)
     except (FileNotFoundError, subprocess.CalledProcessError) as e:
         logging.error(e)
-        portal.terminate_program("Terminating due to error in generating static site.", slack_token, log_channel, context)
         sys.exit(1)
 
     logging.info("Successfully generated static site.")
@@ -91,18 +82,10 @@ def build_microsite(data, context, base_dir="/tmp", local=False):
 
 # local testing
 if __name__ == "__main__":
-    if (len(sys.argv) != 3):
-        print("Incorrect number of arguments.")
-        print("USAGE: python external_portal_publisher.py <repo_name> <repo_url>")
-        sys.exit(1)
-    data = { 
-        "repo_name" : sys.argv[1],
-        "repo_url" : portal.svn_urlify(sys.argv[2])
-    }
-    base = "{}/tmp/{}/".format(os.getcwd(), sys.argv[1])
+    base = "{}/tmp".format(os.getcwd())
     os.makedirs(base)
     class Context:
         function_name = "local-external-portal-publisher"
         aws_request_id = "local"
-    build_microsite(data, Context(), base_dir=base, local=True)
+    build_website({}, Context(), base_dir=base, local=True)
 

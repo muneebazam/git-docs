@@ -27,32 +27,11 @@ def move_swagger_file(name, content_dir, swagger_dir):
     return 0
 
 
-# Terminates the function, sending crash message to slack
-def terminate_program(message, token, channel, context):
-
-    logging.error(message)
-
-    if (context.aws_request_id != "local"):
-
-        cloudwatch_url = "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logStream:group=/aws/lambda/{};streamFilter=typeLogStreamPrefix".format(context.function_name)
-        slack_message = "`ERROR:` Lambda execution `{}` failed: {} \nView logs in CloudWatch:\n {}.".format(context.aws_request_id, message, cloudwatch_url)
-
-        payload={
-        "text": slack_message, 
-        "token": token, 
-        "channel": channel
-        }
-        r = requests.post(slack_chat_url, params=payload)
-
-    sys.exit(1)
-    return 1
-
-
 # Wrapper function to subprocess.run (pipes all stdout/stderr to log file)
 def run_subcommand(command, print_output=True):
 
     try:
-        completed_process = subprocess.run(command, capture_output=True, text=True)
+        completed_process = subprocess.run(command)
         if print_output and completed_process.stdout:
             logging.info(completed_process.stdout)
         if print_output and completed_process.stderr:
