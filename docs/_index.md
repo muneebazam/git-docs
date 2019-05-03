@@ -1,5 +1,5 @@
 +++
-title = "git Docs"
+title = "Git Docs"
 weight = 97
 +++
 
