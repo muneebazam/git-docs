@@ -22,8 +22,6 @@ The following is a list of chronological events that occur when the pipeline is 
 
 ## Compononents
 
-<br/>
-
 ### Configuration File
 
 The configuration file is a JSON object with key/value pairs representing the name and URL for each repository. Below is the configuration file that builds this website:
