@@ -1,8 +1,6 @@
 # Automated Documentation Pipeline
 
-This repository features a collection of lambda functions which power the automated documentation pipeline for the developer portal. 
-
-The `tardis_bot/` directory also contains a set of lambda functions which power the TARDIS slackbot used to onboard/remove repositories and trigger builds for the developer portal. 
+This repository features a collection of lambda functions which power the automated documentation pipeline to build my projects website located [here](http://muneebazam.com/projects/)
 
 <br/>
 
@@ -52,19 +50,10 @@ export AWS_SECRET_MANAGER=developer-portal-publisher
 To run the complete build pipeline locally:
 
 ```
-python external_portal_wrapper.py 
-```
- 
-- This will create a `tmp/` directory with a folder for each hugo site created during the build process.
-- When running locally, each microsite is built synchronously rather than the asynchoronous builds on lambda instances.
-
-To build a microsite for a specific repository locally:
-
-```
-python external_portal_publisher.py <repo_name> <repo_url_to_docs_folder>
+python site_publisher.py 
 ```
 
-- This will create a `tmp/` directory containing a `<repo_name>` folder for the microsite that was built.
+- This will create a `tmp/` directory folder for the repository site that was built.
 
 _Note: the `tmp/` folder must be manually deleted, this is done to prevent accidental deletes between successive runs.
 
