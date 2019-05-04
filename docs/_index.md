@@ -4,7 +4,9 @@ description : Automatically updates a website in real-time using documentation t
 weight : 97
 ---
 
-Git Docs is a pipeline written in Python which pulls a `docs` folder containing markdown documentation from a git repository and publishes the contents onto a website in real-time. It works by cloning a repository containing site assets (html templates, images, css) and a configuration file, pulling in documentation contents from each of the repositories listed in the configuration file, before building and publishing the static site to a hosted location. The pipeline has been built to work with [Hugo](https://gohugo.io/), the worlds fastest static site generation engine. 
+Git Docs is a pipeline written in Python which pulls a `docs` folder containing markdown documentation from a git repository and publishes the contents onto a website in real-time. 
+
+It works by cloning a repository containing site assets (html templates, images, css) and a configuration file listing repositories, pulling in documentation contents from each of the repositories, and building and publishing the static site to a hosted location. The pipeline has been built to work with [Hugo](https://gohugo.io/), the worlds fastest static site generation engine. 
 
 This pipeline significantly reduces the amount of time required to update and deploy a webpage, leaving only the task of content creation to the user. Simply make a change to any markdown file in the `docs/` folder of your repository, and the pipeline will kick in and do the rest. 
 
