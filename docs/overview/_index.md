@@ -1,6 +1,6 @@
 ---
 title : Execution Overview
-description : High level overview of the execution flow and configuration file.
+description : High level overview of the execution flow and configuration files.
 weight : 1
 ---
 
@@ -20,9 +20,7 @@ The following is a list of chronological events that occur when the pipeline is 
 
 <br/>
 
-## Compononents
-
-### Configuration File
+## Configuration File
 
 The configuration file is a JSON object with key/value pairs representing the name and URL for each repository. Below is the configuration file that builds this website:
 
@@ -35,6 +33,6 @@ The configuration file is a JSON object with key/value pairs representing the na
 ```
 
 {{% notice warning %}} 
-The URL must point to a `docs` folder in your repository. Git Docs does not make any assumptions on the file structure of your repository. Passing the generic URL to the root of your repository will result in Git Docs being unable to find your `docs/` folder (even if it exists in the root). 
+The URL must point to a `docs/` folder in your repository. Git Docs does not make any assumptions on the file structure of your repository. Passing the generic URL to the root of your repository will result in Git Docs being unable to find your `docs/` folder (even if it exists in the root). 
 {{% /notice %}}
 
