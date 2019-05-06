@@ -14,6 +14,6 @@ This pipeline significantly reduces the amount of time required to update and de
 The webpage you are currently viewing has been built using Git Docs. Navigating to the repositories for any of the projects listed on this page, you will notice a `docs/` folder in the root, which is the exact content that is published on this webpage. For example, the markdown file containing this pages content is pulled directly from the Git Docs repository [here](https://github.com/muneebazam/git-docs/blob/master/docs/_index.md).
 {{% /notice %}}
 
-For more detailed explanations on the various aspects of Git Docs check out the pages below:
+For more detailed explanations on the various aspects of Git Docs check out the pages listed below:
 
 {{% children description="true" %}}
