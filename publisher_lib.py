@@ -1,5 +1,4 @@
 # A collection of common functions used by the git docs framework 
-
 import os
 import logging
 import json
@@ -12,7 +11,7 @@ import shutil
 import requests
 from botocore.exceptions import ClientError
 
-# Generates a swagger page and moves the swagger spec, if required
+# Override site icon with project icon, if exists
 def move_repository_icon(name, content_dir, image_dir):
     image_file = "{0}{1}/{1}.png".format(content_dir, name)
     if (os.path.isfile(image_file)):
@@ -84,7 +83,7 @@ def repository_configuration(config_file):
 
     return 0
 
-# pulls content(s) from specificed url with svn client
+# pulls content(s) from specified url with svn client
 def svn_client(svn_url, user, password):
 
     try:

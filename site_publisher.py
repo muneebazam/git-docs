@@ -51,7 +51,7 @@ def build_website(data, context, base_dir="/tmp", local=False):
         logging.error(e)
         sys.exit(1)
 
-    # Retrieve JSON config file, will terminuate upon failure 
+    # Retrieve JSON config file, will terminate upon failure 
     try:
         config = portal.repository_configuration(config_file)
         logging.info("Read configuration file containing {} repositories.".format(len(config)))
