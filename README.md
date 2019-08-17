@@ -1,4 +1,4 @@
-# Automated Documentation Pipeline
+# Git Docs
 
 This repository features a collection of lambda functions which power the automated documentation pipeline to build my projects website located [here](http://muneebazam.com/projects/)
 
