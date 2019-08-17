@@ -10,7 +10,7 @@ Under the hood, Git Docs is powered by AWS.
 
 At its core it is a set of [AWS Lambda](https://aws.amazon.com/lambda/) functions which are configured (via [CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html)) to trigger periodically and publish any documentation changes to a hosted [S3 Bucket](https://aws.amazon.com/s3/). 
 
-This architecture can be better visualized using the diagram below.
+The architecture can be better visualized using the diagram below.
 
 ![](architecture.png)
 
