@@ -29,7 +29,7 @@ Alternatively you can download the executable here: https://github.com/gohugoio/
 3. Clone Repository and Download Dependencies
 
 ```
-git clone https://github.com/LoyaltyOne/dev-portal-lambdas.git
+git clone https://github.com/muneebazam/git-docs.git
 pip install -r requirements.txt
 ```
 
