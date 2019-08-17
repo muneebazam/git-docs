@@ -35,13 +35,17 @@ pip install -r requirements.txt
 
 <br/>
 
-4. Set Secret Environment Variable
+4. Set Environment Variables
 
 ```
-export AWS_SECRET_MANAGER=developer-portal-publisher
-```
+export GIT_USER=<git_user>
+export GIT_PASSWORD=<git_password>
+export REPO_NAME=<repository_name>
+export S3_BUCKET=<s3_bucket_name>
+export BASE_URL=<website_base_url>
+export OUTPUT_DIR=projects
 
-*This is set on our lambda instances as well and allows us to retrieve secrets from AWS Secret Manager*
+```
 
 <br/>
 
@@ -55,7 +59,7 @@ python site_publisher.py
 
 - This will create a `tmp/` directory folder for the repository site that was built.
 
-_Note: the `tmp/` folder must be manually deleted, this is done to prevent accidental deletes between successive runs.
+_Note:_ the `tmp/` folder must be manually deleted, this is done to prevent accidental deletes between successive runs.
 
 <br/>
 
