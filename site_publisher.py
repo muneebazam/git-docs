@@ -12,28 +12,18 @@ import shutil
 import publisher_lib as portal
 
 # Retrieve environment variables 
-secret_name = os.environ["AWS_SECRET_MANAGER"]
+git_user = os.environ["GIT_USER"]
+git_password = os.environ["GIT_PASSWORD"]
+repo_name = os.environ["REPO_NAME"]
+s3_bucket = os.environ["S3_BUCKET"]
+base_url = os.environ["BASE_URL"]
+output_dir = os.environ["OUTPUT_DIR"]
 
 def build_website(data, context, base_dir="/tmp", local=False):
 
      # Configure logger and extract data
     root = logging.getLogger()
     root.setLevel(logging.INFO)
-
-    # Retrieve secrets from AWS Secret Manager, will terminate upon failure
-    try:
-        secrets_json = portal.secret_manager_client(secret_name)
-        secrets = json.loads(secrets_json)
-        git_user = secrets["git_user"]
-        git_password = secrets["git_password"]
-        repo_name = secrets["repo_name"]
-        s3_bucket = secrets["s3_bucket"]
-        base_url = secrets["base_url"]
-        output_dir = secrets["output_dir"]
-        logging.info("Retrieved {} secret from AWS Secret Manager.".format(secret_name))
-    except Exception as e:
-        logging.error(e)
-        sys.exit(1)
 
     # Define global read-only variables 
     repo_dir = "{}/{}/".format(base_dir, repo_name)
@@ -51,7 +41,7 @@ def build_website(data, context, base_dir="/tmp", local=False):
         logging.error(e)
         sys.exit(1)
 
-    # Retrieve JSON config file, will terminate upon failure 
+    # Retrieve JSON config file, will terminuate upon failure 
     try:
         config = portal.repository_configuration(config_file)
         logging.info("Read configuration file containing {} repositories.".format(len(config)))
