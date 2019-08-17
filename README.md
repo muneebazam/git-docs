@@ -44,7 +44,6 @@ export REPO_NAME=<repository_name>
 export S3_BUCKET=<s3_bucket_name>
 export BASE_URL=<website_base_url>
 export OUTPUT_DIR=projects
-
 ```
 
 <br/>
