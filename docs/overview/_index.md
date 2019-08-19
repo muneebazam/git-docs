@@ -27,7 +27,7 @@ The configuration file is a JSON object with key/value pairs representing the na
 ```
 {
     "git-docs" : "https://github.com/muneebazam/git-docs/tree/master/docs",
-    "coffee-bot" : "https://github.com/muneebazam/coffee-bot/tree/master/docs",
+    "quest-balance" : "https://github.com/muneebazam/quest-balance/tree/master/docs",
     "automation-wizards" : "https://github.com/muneebazam/automation-wizards/tree/master/docs"
 }
 ```
